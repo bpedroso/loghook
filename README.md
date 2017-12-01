@@ -2,14 +2,14 @@
 
 A barebones Node.js app using [Express 4](http://expressjs.com/).
 
-This application supports the [Getting Started with Node on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article - check it out.
+This application is based on the [Getting Started with Node on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article - check it out.
 
 ## Running Locally
 
 Make sure you have [Node.js](http://nodejs.org/) and the [Heroku CLI](https://cli.heroku.com/) installed.
 
 ```sh
-$ git clone git@github.com:heroku/loghook.git # or clone your own fork
+$ git clone git@github.com:bpedroso/loghook.git # or clone your own fork
 $ cd loghook
 $ npm install
 $ npm start
