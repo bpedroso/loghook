@@ -2,7 +2,9 @@
 
 A barebones Node.js app using [Express 4](http://expressjs.com/).
 
-This application is based on the [Getting Started with Node on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article - check it out.
+This application is used to receive notifications as a webhook and exposes a UI to show logs.
+
+Using Socket.io to show logs [Socket.io](https://socket.io/) 
 
 ## Running Locally
 
@@ -26,7 +28,7 @@ $ heroku open
 ```
 or
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://dashboard.heroku.com/apps/loghook/deploy/heroku-git)
 
 ## Documentation
 

@@ -44,6 +44,8 @@ app.use(function(err, req, res, next) {
   res.render('pages/error');
 });
 
+global.appRoot = path.resolve(__dirname);
+
 app.get('/', function(request, response) {
   response.render('pages/index')
 });

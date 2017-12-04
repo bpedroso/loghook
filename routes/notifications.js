@@ -1,15 +1,15 @@
 var express = require('express');
 var router = express.Router();
-// var mongo = require('mongodb').MongoClient;
+var io = require('socket.io')(http);
 
 router.get('/', function(req, res, next) {
     console.log('Receive request POST (host %s ip %s baseUrl %s)', req.hostname, req.ip, req.baseUrl);
-    res.status(201).send({message: 'respond with a resource'});
+    res.sendFile(appRoot + '/views/html/index.html');
 });
 
-router.post('/', function(req, res, next) {
+router.put('/', function(req, res, next) {
     console.log('Receive request POST (host %s ip %s baseUrl %s)', req.hostname, req.ip, req.baseUrl);
-    res.status(201).send({message: 'respond with a resource'});
+    io.emit('notificationEvt', { for: 'everyone' });
 });
 
 module.exports = router;
