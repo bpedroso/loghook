@@ -15,6 +15,18 @@ var Notification = function (httpmethod, hostname, ip, baseUrl, data, query) {
 
 router.get('/', function(req, res, next) {
     console.log('Receive request GET (host %s ip %s baseUrl %s)', req.hostname, req.ip, req.baseUrl);
+
+    var url = require('url');
+    var url_parts = url.parse(req.url, true);
+    var query = url_parts.query;
+
+    console.log(list.size);
+    if(list.length >= historySize) {
+        list.splice(0, 1);
+    }
+    list.push(new Notification('POST', req.hostname, req.ip, req.baseUrl, req.body, query));
+
+
     res.send(list);
 });
 
@@ -35,8 +47,8 @@ router.put('/', function(req, res, next) {
     if(list.length >= historySize) {
         list.splice(0, 1);
     }
-
     list.push(new Notification('PUT', req.hostname, req.ip, req.baseUrl, req.body, query));
+
     res.send();
 });
 
@@ -52,7 +64,6 @@ router.post('/', function(req, res, next) {
     if(list.length >= historySize) {
         list.splice(0, 1);
     }
-
     list.push(new Notification('POST', req.hostname, req.ip, req.baseUrl, req.body, query));
     res.send();
 });
