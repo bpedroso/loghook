@@ -3,19 +3,17 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var favicon = require('serve-favicon');
-
 var app = express();
-
 var cool = require('./routes/cool');
 var notifications = require('./routes/notifications');
+
+var http = require('http');
+var io = require('socket.io')(http);
 
 // views is directory for all template files
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-// uncomment after placing your favicon in /public
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -50,4 +48,26 @@ app.get('/', function(request, response) {
   response.render('pages/index')
 });
 
+io.on('connection', function(socket){
+  console.log('a user connected');
+
+  socket.on('new message', function (data) {
+    console.log('received -> %s', data)
+
+    socket.broadcast.emit('new message', {
+      message: data
+    });
+  });
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+});
+
+function emitMessage(...args) {
+  console.log(args);
+
+  io.emit('new message', args)
+}
+
+module.exports.emitMessage = emitMessage;
 module.exports = app;
