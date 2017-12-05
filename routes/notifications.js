@@ -4,11 +4,12 @@ var app = require('../app');
 var list = [];
 
 var historySize = 100;
-var Notification = function (httpmethod, hostname, ip, baseUrl, query) {
+var Notification = function (httpmethod, hostname, ip, baseUrl, data, query) {
     this.httpmethod = httpmethod;
     this.hostname = hostname;
     this.ip = ip;
     this.baseUrl = baseUrl;
+    this.data = data;
     this.query = query;
 };
 
@@ -35,7 +36,7 @@ router.put('/', function(req, res, next) {
         list.splice(0, 1);
     }
 
-    list.push(new Notification('PUT', req.hostname, req.ip, req.baseUrl, query));
+    list.push(new Notification('PUT', req.hostname, req.ip, req.baseUrl, req.body, query));
     res.send();
 });
 
@@ -52,7 +53,7 @@ router.post('/', function(req, res, next) {
         list.splice(0, 1);
     }
 
-    list.push(new Notification('POST', req.hostname, req.ip, req.baseUrl, query));
+    list.push(new Notification('POST', req.hostname, req.ip, req.baseUrl, req.body, query));
     res.send();
 });
 
